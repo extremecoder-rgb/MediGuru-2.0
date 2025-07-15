@@ -6,7 +6,7 @@ import gradio as gr
 from typing import Tuple
 
 from brain_of_the_doctor import encode_image, analyze_image_with_query
-from voice_of_the_patient import record_audio, transcribe_with_groq
+from voice_of_the_patient import transcribe_with_groq
 from voice_of_the_doctor import text_to_speech_with_gtts
 
 system_prompt = """
