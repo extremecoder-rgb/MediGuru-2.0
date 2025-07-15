@@ -4,6 +4,14 @@ A web-based AI doctor assistant, MediGuru, allows users to speak their symptoms 
 
 ---
 
+## 🖼️ Technical Architecture
+
+![Technical Architecture](technical_architecture.png)
+
+*Place the image file as `technical_architecture.png` in the project root or update the path as needed.*
+
+---
+
 ## 🚀 Tech Stack
 - **Python 3.10+**
 - **Gradio** (web UI)
