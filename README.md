@@ -1,6 +1,14 @@
 # 🧠 MediGuru
 
-A web-based AI doctor assistant, MediGuru, allows users to speak their symptoms and upload medical images (like X-rays) to receive a professional, voice-based diagnosis and advice.
+MediGuru is an advanced web-based AI healthcare assistant that empowers users to speak their symptoms, upload medical images (like X-rays), and even analyze prescriptions—all through a simple, intuitive interface. Leveraging state-of-the-art speech-to-text, vision, and language models, MediGuru delivers:
+
+- **Professional, voice-based medical advice** tailored to your symptoms and images
+- **Prescription analysis** for uploaded prescriptions or medication lists
+- **Multi-modal AI** that combines voice, text, and image understanding for holistic responses
+- **Natural, conversational interactions** that feel like talking to a real doctor
+- **Instant audio feedback** so you can listen to the AI doctor's response
+
+Whether you need a quick check on your symptoms, a second opinion on a scan, or help understanding a prescription, MediGuru brings the power of modern AI to your healthcare journey—all from your browser.
 
 ---
 
