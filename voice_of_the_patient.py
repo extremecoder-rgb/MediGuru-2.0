@@ -17,33 +17,36 @@ from groq import Groq
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-def record_audio(file_path, duration=7, sample_rate=44100):
-    """
-    Records audio using sounddevice and saves it as an MP3.
+# Only import sounddevice and define record_audio if not running on Render
+if os.environ.get("RENDER") is None:
+    import sounddevice as sd
+    def record_audio(file_path, duration=7, sample_rate=44100):
+        """
+        Records audio using sounddevice and saves it as an MP3.
 
-    Args:
-        file_path (str): Path to save the recorded audio file.
-        duration (int): Duration of the recording in seconds.
-        sample_rate (int): Sampling rate for audio.
-    """
-    try:
-        logging.info("Recording audio... Speak now.")
-        audio = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype='int16')
-        sd.wait()
+        Args:
+            file_path (str): Path to save the recorded audio file.
+            duration (int): Duration of the recording in seconds.
+            sample_rate (int): Sampling rate for audio.
+        """
+        try:
+            logging.info("Recording audio... Speak now.")
+            audio = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype='int16')
+            sd.wait()
 
-       
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as temp_wav:
-            write(temp_wav.name, sample_rate, audio)
-            temp_wav_path = temp_wav.name
+           
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as temp_wav:
+                write(temp_wav.name, sample_rate, audio)
+                temp_wav_path = temp_wav.name
 
-        
-        sound = AudioSegment.from_wav(temp_wav_path)
-        sound.export(file_path, format="mp3", bitrate="128k")
-        os.remove(temp_wav_path)
+            
+            sound = AudioSegment.from_wav(temp_wav_path)
+            sound.export(file_path, format="mp3", bitrate="128k")
+            os.remove(temp_wav_path)
 
-        logging.info(f"Audio saved to {file_path}")
-    except Exception as e:
-        logging.error(f"An error occurred while recording: {e}")
+            logging.info(f"Audio saved to {file_path}")
+        except Exception as e:
+            logging.error(f"An error occurred while recording: {e}")
 
 
 def transcribe_with_groq(stt_model, audio_filepath, GROQ_API_KEY):
@@ -71,7 +74,7 @@ def transcribe_with_groq(stt_model, audio_filepath, GROQ_API_KEY):
 
 
 
-# Remove or guard the __main__ block for production deployment
+# Guard the __main__ block as well
 if __name__ == "__main__" and os.environ.get("RENDER") is None:
     audio_filepath = "patient_voice_test_for_patient.mp3"
     record_audio(file_path=audio_filepath, duration=7)
