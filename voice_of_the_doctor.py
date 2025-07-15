@@ -3,7 +3,7 @@ load_dotenv()
 
 import os
 from gtts import gTTS
-from playsound import playsound  
+import sys
 
 
 def text_to_speech_with_gtts(input_text, output_filepath):
@@ -23,8 +23,10 @@ def text_to_speech_with_gtts(input_text, output_filepath):
         tts.save(output_filepath)
         print(f"✅ Audio saved to {output_filepath}")
 
-        # Play the audio file
-        playsound(output_filepath)
+        # Play the audio file (only if running locally)
+        if sys.platform in ["win32", "darwin"] and os.environ.get("RENDER") is None:
+            from playsound import playsound
+            playsound(output_filepath)
 
     except Exception as e:
         print(f"❌ Error: {e}")

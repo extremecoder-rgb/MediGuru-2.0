@@ -65,6 +65,6 @@ iface = gr.Interface(
     description="Speak your symptoms and upload a medical image. Get advice back — like a virtual doctor."
 )
 
-# Run with share link for external access
-iface.launch(debug=True, share=True)
+# Run with production settings for Render
+iface.launch(server_name="0.0.0.0", server_port=int(os.environ.get("PORT", 7860)))
 

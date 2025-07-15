@@ -71,17 +71,12 @@ def transcribe_with_groq(stt_model, audio_filepath, GROQ_API_KEY):
 
 
 
-if __name__ == "__main__":
-    
+# Remove or guard the __main__ block for production deployment
+if __name__ == "__main__" and os.environ.get("RENDER") is None:
     audio_filepath = "patient_voice_test_for_patient.mp3"
-
- 
     record_audio(file_path=audio_filepath, duration=7)
-
-    
     GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
     stt_model = "whisper-large-v3"
-
     if GROQ_API_KEY:
         text = transcribe_with_groq(stt_model, audio_filepath, GROQ_API_KEY)
         print("\n📝 Transcription:\n", text)
