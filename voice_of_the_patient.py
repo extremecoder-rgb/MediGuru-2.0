@@ -7,7 +7,6 @@ import os
 import tempfile
 from pydub import AudioSegment
 from scipy.io.wavfile import write
-import sounddevice as sd
 import numpy as np
 from io import BytesIO
 
